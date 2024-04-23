@@ -8,31 +8,32 @@ import 'package:online_course/src/theme/app_color.dart';
 import 'package:online_course/src/widgets/custom_appbar.dart';
 
 class CourseDetailPage extends StatelessWidget {
-  const CourseDetailPage({required this.course, this.isHero = false, Key? key})
+  const CourseDetailPage({required this.course, this.isHero = false, Key? key, this.isPurchased=false})
       : super(key: key);
   final Course course;
   final bool isHero;
+  final bool isPurchased;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.appBgColor,
-      appBar: const CustomAppBar(title: "Detail"),
-      body: _buildBody(),
-      bottomNavigationBar: CourseDetailBottomBlock(course: course),
+      appBar: const CustomAppBar(title: "Details"),
+      body: _buildBody(course),
+      bottomNavigationBar: !isPurchased ? CourseDetailBottomBlock(course: course):null,
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(Course course) {
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CourseDetailImage(
+          !isPurchased? CourseDetailImage(
             course: course,
             isHero: isHero,
-          ),
+          ):const SizedBox(),
           const SizedBox(
             height: 15,
           ),
@@ -43,7 +44,8 @@ class CourseDetailPage extends StatelessWidget {
             height: 5,
           ),
           const Divider(),
-          const CourseDetailTabBar()
+        
+           CourseDetailTabBar(courseId: course.id)
         ],
       ),
     );

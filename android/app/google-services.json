@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "12778704235",
+    "project_id": "edtech02-14e2c",
+    "storage_bucket": "edtech02-14e2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12778704235:android:97657d9a4632c3b0f0102e",
+        "android_client_info": {
+          "package_name": "com.sangvaleap.online_course"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGML5RUr6zY0D_NS_kPvsLufaEKk-8520"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

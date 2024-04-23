@@ -12,6 +12,7 @@ class ExploreCategory extends StatefulWidget {
 class _ExploreCategoryState extends State<ExploreCategory> {
   int selectedCategory = 0;
   final List _categories = categories;
+  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -24,7 +25,9 @@ class _ExploreCategoryState extends State<ExploreCategory> {
             data: _categories[index],
             isSelected: selectedCategory == index,
             onTap: () {
+              
               setState(() {
+                
                 selectedCategory = index;
               });
             },

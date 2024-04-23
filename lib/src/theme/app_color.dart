@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  static const primary = Color(0xFFf77080);
-  static const secondary = Color(0xFFe96561);
+  // static const primary = Color(0xFFf77080);
+  // static const secondary = Color(0xFFe96561);
+  static const primary = Color(0xFFfdcc20);
+  static const secondary = Color.fromARGB(255, 34, 147, 212);
 
   static const mainColor = Color(0xFF000000);
   static const darker = Color(0xFF3E4249);
@@ -17,7 +19,8 @@ class AppColor {
   static const glassTextColor = Colors.white;
   static const labelColor = Color(0xFF8A8989);
   static const glassLabelColor = Colors.white;
-  static const actionColor = Color(0xFFe54140);
+  // static const actionColor = Color(0xFFe54140);
+  static const actionColor = Color.fromARGB(255, 41, 84, 255);
 
   static const yellow = Color(0xFFffcb66);
   static const green = Color(0xFFa2e1a6);

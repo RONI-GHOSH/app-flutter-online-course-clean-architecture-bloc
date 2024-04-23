@@ -21,6 +21,9 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
       GetCourses event, Emitter<CourseState> emit) async {
     emit(const GetCoursesLoading());
     final result = await getCourseUseCase();
+    
+
+
     result.fold(
       (failure) => emit(GetCoursesError(failure.errorMessage)),
       (r) => emit(GetCoursesLoaded(r)),

@@ -18,9 +18,9 @@ class RecommendItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(right: 10),
+        margin: const EdgeInsets.only(right: 10,bottom: 10),
         padding: const EdgeInsets.all(10),
-        width: 300,
+        width: 400,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,

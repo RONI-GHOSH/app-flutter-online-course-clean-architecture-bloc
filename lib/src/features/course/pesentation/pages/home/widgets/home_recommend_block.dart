@@ -4,6 +4,7 @@ import 'package:online_course/core/utils/app_navigate.dart';
 import 'package:online_course/core/utils/app_util.dart';
 import 'package:online_course/src/features/course/pesentation/bloc/recommend/recommend_course_bloc.dart';
 import 'package:online_course/src/features/course/pesentation/pages/course_detail/course_detail.dart';
+import 'package:online_course/src/features/course/pesentation/pages/explore/explore.dart';
 import 'package:online_course/src/widgets/custom_progress_indicator.dart';
 import 'package:online_course/src/features/course/pesentation/pages/home/widgets/recommend_item.dart';
 import 'package:online_course/src/theme/app_color.dart';
@@ -26,21 +27,30 @@ class _HomeRecommendBlcokState extends State<HomeRecommendBlcok> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+         Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 "Recommended",
                 style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
                     color: AppColor.textColor),
               ),
-              Text(
-                "See all",
-                style: TextStyle(fontSize: 14, color: AppColor.darker),
+              GestureDetector(
+                onTap: () {
+                  AppNavigator.to(
+                        context,
+                        const ExplorePage()
+                        ,
+                      );
+                },
+                child: const Text(
+                  "See all",
+                  style: TextStyle(fontSize: 14, color: AppColor.darker),
+                ),
               ),
             ],
           ),
@@ -65,7 +75,7 @@ class _HomeRecommendBlcokState extends State<HomeRecommendBlcok> {
             return const CustomProgressIndicator();
           } else if (state is RecommendCourseLoaded) {
             final courses = state.courses;
-            return Row(
+            return Column(
               children: List.generate(
                 courses.length,
                 (index) => Padding(

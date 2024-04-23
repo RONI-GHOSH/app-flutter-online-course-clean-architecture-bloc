@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:online_course/core/utils/dummy_data.dart';
+import 'package:online_course/src/features/course/data/datasources/account_courses_list.dart';
+import 'package:online_course/src/features/course/data/models/course_model.dart';
 import 'package:online_course/src/features/course/pesentation/pages/my_course/widgets/my_course_appbar.dart';
-import 'package:online_course/src/features/course/pesentation/pages/my_course/widgets/my_course_complete_course_list.dart';
 import 'package:online_course/src/features/course/pesentation/pages/my_course/widgets/my_course_progress_course_list.dart';
 import 'package:online_course/src/theme/app_color.dart';
 
@@ -19,7 +20,7 @@ class _MyCoursePageState extends State<MyCoursePage>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 1, vsync: this);
   }
 
   @override
@@ -36,8 +37,20 @@ class _MyCoursePageState extends State<MyCoursePage>
           child: TabBarView(
             controller: tabController,
             children: <Widget>[
-              MyCourseProgressCourseList(myProgressCourses: myCourseProgress),
-              MyCourseCompleteCourseList(myCompleteCourses: myCourseComplete),
+              FutureBuilder(
+                future: fetchMyCourses(),
+                builder: (BuildContext context, AsyncSnapshot<List<CourseModel>> snapshot) { 
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  }
+                  return MyCourseProgressCourseList(myProgressCourses: snapshot.data! );
+                 },
+                
+                ),
+              // MyCourseCompleteCourseList(myCompleteCourses: myCourseComplete),
             ],
           ),
         ),
@@ -65,11 +78,11 @@ class _MyCoursePageState extends State<MyCoursePage>
         indicatorSize: TabBarIndicatorSize.tab,
         tabs: [
           Tab(
-            text: "Progress (${myCourseProgress.length})",
+            text: "My courses (${myCourseProgress.length})",
           ),
-          Tab(
-            text: "Completed (${myCourseComplete.length})",
-          )
+          // Tab(
+          //   text: "Completed (${myCourseComplete.length})",
+          // )
         ],
       ),
     );

@@ -139,7 +139,7 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
           (index) => BottomBarItem(
             _barItems[index]["icon"],
             isActive: _activeTab == index,
-            activeColor: AppColor.primary,
+            activeColor: AppColor.darker,
             onTap: () {
               onPageChanged(index);
             },
