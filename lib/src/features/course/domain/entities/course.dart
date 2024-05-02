@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 // ignore: must_be_immutable
 class Course extends Equatable {
-  Course(
+  Course( 
       {required this.id,
       required this.name,
       required this.price,

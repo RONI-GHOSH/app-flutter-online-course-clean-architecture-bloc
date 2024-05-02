@@ -8,5 +8,5 @@ sealed class CourseEvent extends Equatable {
 }
 
 class GetCourses extends CourseEvent {
-  const GetCourses();
+  const GetCourses({required String filter, required String query});
 }

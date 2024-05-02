@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:online_course/src/widgets/custom_textfield.dart';
 import 'package:online_course/src/widgets/icon_box.dart';
 import 'package:online_course/src/theme/app_color.dart';
 
 class ExploreSearchBlock extends StatefulWidget {
-  const ExploreSearchBlock({super.key});
+   final Function(String) onSearch;
+
+  const ExploreSearchBlock({Key? key, required this.onSearch}) : super(key: key);
+
 
   @override
   State<ExploreSearchBlock> createState() => _ExploreSearchBlockState();
 }
 
 class _ExploreSearchBlockState extends State<ExploreSearchBlock> {
+   late TextEditingController _searchController;
+   
+   @override
+  void initState() {
+  
+    super.initState();
+     _searchController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,14 +41,10 @@ class _ExploreSearchBlockState extends State<ExploreSearchBlock> {
           IconBox(
             bgColor: AppColor.primary,
             radius: 10,
-            onTap: () {},
-            child: SvgPicture.asset(
-              "assets/icons/filter.svg",
-              colorFilter:
-                  const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-              width: 24,
-              height: 24,
-            ),
+            onTap: () {
+               widget.onSearch(_searchController.text);
+            },
+            child: const Icon(Icons.search, color: Colors.white),
           )
         ],
       ),

@@ -35,7 +35,8 @@ class SettingItem extends StatelessWidget {
       decoration: BoxDecoration(color: bgIconColor, shape: BoxShape.circle),
       child: SvgPicture.asset(
         leadingIcon!,
-        colorFilter: ColorFilter.mode(leadingIconColor, BlendMode.srcIn),
+     
+        // colorFilter: ColorFilter.mode(leadingIconColor, BlendMode.screen),
         width: 22,
         height: 22,
       ),

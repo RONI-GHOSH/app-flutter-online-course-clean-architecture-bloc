@@ -10,7 +10,7 @@ class ChatAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "Chat",
+          "Previous year questions",
           style: TextStyle(
             fontSize: 28,
             color: AppColor.textColor,

@@ -1,4 +1,5 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:online_course/src/features/course/data/datasources/account_courses_list.dart';
 import 'package:online_course/src/features/course/domain/entities/course.dart';
@@ -8,9 +9,10 @@ import 'package:razorpay_web/razorpay_web.dart';
 import 'package:rive/rive.dart';
 
 class CourseDetailBottomBlock extends StatefulWidget {
-   CourseDetailBottomBlock({required this.course, super.key});
+   const CourseDetailBottomBlock({required this.course, super.key, required this.subjects});
 
   final Course course;
+   final Map<String, int> subjects;
 
   @override
   State<CourseDetailBottomBlock> createState() => _CourseDetailBottomBlockState();
@@ -19,10 +21,18 @@ class CourseDetailBottomBlock extends StatefulWidget {
 class _CourseDetailBottomBlockState extends State<CourseDetailBottomBlock> {
    late Razorpay _razorpay;
 
+
+    Map<int,String> pricing = {};
+  List<int> selectedForPayment = [];
+  bool _isProcessing = false;
+   
+
+
    @override
   void initState() {
    
     super.initState();
+    // getPrice();
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -36,8 +46,11 @@ class _CourseDetailBottomBlockState extends State<CourseDetailBottomBlock> {
     _razorpay.clear();
   }
 
-  void openCheckout() async {
-    int price =int.parse(widget.course.price.toString());
+  void openCheckout(String? pricee) async {
+   if(pricee==null){
+     return;
+   }
+    int price =int.parse(pricee.toString());
     var options = {
       'key': 'rzp_test_1DP5mmOlF5G5ag',
       'amount': price*100,
@@ -54,7 +67,12 @@ class _CourseDetailBottomBlockState extends State<CourseDetailBottomBlock> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async{
-   int status =  await addCourseToAccount(widget.course.id);
+    setState(() {
+       _isProcessing =true;
+    });
+   
+   int status =  await addCourseToAccount(widget.course.id,selectedForPayment );
+   _isProcessing =false;
    if(status == 200){
       _showResponse('Payment Successful',response.paymentId);
    }else{
@@ -121,8 +139,11 @@ Widget _buildBottomSheet(BuildContext context, String message, [String? paymentI
   );
 }
 
+
+
   @override
   Widget build(BuildContext context) {
+    bool _isloading = false;
     return Container(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 20),
       height: 80,
@@ -138,7 +159,7 @@ Widget _buildBottomSheet(BuildContext context, String message, [String? paymentI
           ),
         ],
       ),
-      child: Row(
+      child: !_isProcessing ? Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -181,12 +202,64 @@ Widget _buildBottomSheet(BuildContext context, String message, [String? paymentI
               radius: 10,
               title: "Buy Now",
               onTap: () {
-                openCheckout();
+               showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return SimpleDialog(
+                  title: const Text('Select an option'),
+                  children: !_isloading? widget.subjects.keys.map((String subject) {
+                    return SimpleDialogOption(
+                      onPressed: () async {
+
+
+                         if(widget.subjects[subject] == 0){
+
+
+                         selectedForPayment.addAll(widget.subjects.values.toList().cast<int>());
+
+                          openCheckout(widget.course.price);
+                         }else{
+                          _isloading = true;
+                            await getPrice();
+                            _isloading = false;
+                            selectedForPayment.add(widget.subjects[subject]??0);
+                            openCheckout(pricing[widget.subjects[subject]]??widget.course.price);
+                         }
+                        
+                        Navigator.pop(context,widget.subjects[subject]);
+                      },
+                      child: Text(subject),
+                    );
+                  }).toList() : [const CircularProgressIndicator()],
+                );
+              },
+            );
               },
             ),
           ),
         ],
-      ),
+      ):const Center(
+        child: CircularProgressIndicator(),
+      )
+      ,
     );
+  }
+
+  Future<void> getPrice() async {
+       QuerySnapshot snapshot =await  FirebaseFirestore.instance.collection('courses').where('id' , isEqualTo: widget.course.id).get();
+    // ignore: unnecessary_null_comparison
+    if(snapshot!=null && snapshot.docs!=null){
+        var data =  snapshot.docs[0].data() as  Map<String, dynamic> ;
+    
+        (data['pricing'] as Map<dynamic, dynamic>).forEach((key, value) {
+            pricing[int.parse(key)] = value as String; // Assuming values are always string
+        });
+        
+        setState(() {
+          
+        });
+        
+        print(pricing);
+    }
   }
 }

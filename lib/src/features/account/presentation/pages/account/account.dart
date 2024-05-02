@@ -41,7 +41,7 @@ class _AccountPageState extends State<AccountPage> {
           const SizedBox(
             height: 20,
           ),
-          const AccountRecordBlock(),
+          // const AccountRecordBlock(),
           const SizedBox(
             height: 20,
           ),

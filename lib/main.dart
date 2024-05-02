@@ -8,6 +8,7 @@ import 'package:online_course/src/features/course/pesentation/bloc/explore/cours
 import 'package:online_course/src/features/course/pesentation/bloc/favorite_course/favorite_course_bloc.dart';
 import 'package:online_course/src/features/course/pesentation/bloc/feature/feature_course_bloc.dart';
 import 'package:online_course/src/features/course/pesentation/bloc/recommend/recommend_course_bloc.dart';
+import 'package:online_course/src/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:online_course/src/root_app.dart';
 import 'src/theme/app_color.dart';
 
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: const Color.fromARGB(255, 45, 94, 255),
         ),
-        home: const RootApp(),
+        home: const  OnboardingScreen(),
       ),
     );
   }

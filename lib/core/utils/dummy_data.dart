@@ -5,7 +5,7 @@ var profile = {
 };
 
 List categories = [
-  {"name": "All", "icon": "assets/icons/categories/all.svg"},
+  {"name": "", "icon": "assets/icons/categories/all.svg"},
   {"name": "Coding", "icon": "assets/icons/categories/coding.svg"},
   {"name": "Education", "icon": "assets/icons/categories/education.svg"},
   {"name": "Design", "icon": "assets/icons/categories/design.svg"},

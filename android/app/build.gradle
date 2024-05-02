@@ -53,9 +53,29 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
+    signingConfigs {
+        release {
+            keyAlias 'edtech2'
+            keyPassword 'edtech2'
+            storeFile file('C:\\Users\\THERO\\edtech2-keystore.jks')
+            storePassword 'edtech2'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        debug {
+            keyAlias 'edtech2'
+            keyPassword 'edtech2'
+            storeFile file('C:\\Users\\THERO\\edtech2-keystore.jks')
+            storePassword 'edtech2'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
+        }
+        debug {
             signingConfig signingConfigs.debug
         }
     }

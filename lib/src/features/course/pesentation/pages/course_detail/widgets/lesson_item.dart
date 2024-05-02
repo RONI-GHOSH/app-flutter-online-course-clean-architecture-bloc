@@ -1,23 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:online_course/core/utils/app_navigate.dart';
 import 'package:online_course/src/features/course/data/models/course_lessons.dart';
+import 'package:online_course/src/features/document_viewer/presentation/pdf_viewer.dart';
 import 'package:online_course/src/features/video/presentation/screen/video_player.dart';
 import 'package:online_course/src/theme/app_color.dart';
 
 import '../../../../../../widgets/custom_image.dart';
 
 class LessonItem extends StatelessWidget {
-  const LessonItem({Key? key, required this.data}) : super(key: key);
+  const LessonItem({Key? key, required this.data, this.clickable=false, required this.type}) : super(key: key);
   final CourseLessons data;
+  final bool clickable;
+  final int type;
+
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AppNavigator.to(
+        if(!clickable) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Please purchase the course first"),
+            ),
+          );
+          return;
+
+        }
+      if(type==1){
+         AppNavigator.to(
               context,
               VideoPlayer(url:data.videoUrl??''),
             );
+
+      }else{
+          AppNavigator.to(
+              context,
+              PdfViewer(url:data.videoUrl??''),
+            );
+      }
+
+
+       
       },
       child: Container(
           margin: const EdgeInsets.all(5),

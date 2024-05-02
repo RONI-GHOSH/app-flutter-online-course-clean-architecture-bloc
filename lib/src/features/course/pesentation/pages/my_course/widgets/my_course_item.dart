@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:online_course/core/utils/app_navigate.dart';
 import 'package:online_course/src/features/course/data/models/course_model.dart';
@@ -6,7 +7,7 @@ import 'package:online_course/src/features/course/pesentation/pages/course_detai
 import 'package:online_course/src/theme/app_color.dart';
 import '../../../../../../widgets/custom_image.dart';
 
-class MyCourseItem extends StatelessWidget {
+class MyCourseItem extends StatefulWidget {
   const MyCourseItem(
       {required this.data,
       Key? key,
@@ -18,12 +19,23 @@ class MyCourseItem extends StatelessWidget {
   final double completedPercent;
 
   @override
+  State<MyCourseItem> createState() => _MyCourseItemState();
+}
+
+class _MyCourseItemState extends State<MyCourseItem> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async{
+         
+         Map<int, List<int>> courses = await fetchMapFromFirestore();
+         print(courses);
+
+         
+
          AppNavigator.to(
               context,
-              CourseDetailPage(course: data,isPurchased: true),
+              CourseDetailPage(course: widget.data,isPurchased: true,purchasedType:courses[widget.data.id] ?? [0]),
             );
       },
       child: Container(
@@ -48,7 +60,7 @@ class MyCourseItem extends StatelessWidget {
     return Row(
       children: [
         CustomImage(
-          data.image,
+          widget.data.image,
           radius: 10,
           height: 70,
           width: 70,
@@ -61,7 +73,7 @@ class MyCourseItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                data.name,
+                widget.data.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
@@ -80,8 +92,8 @@ class MyCourseItem extends StatelessWidget {
                 value: 
                 // data["complete_percent"].toDouble() ??
                  1.0,
-                backgroundColor: progressColor.withOpacity(.2),
-                valueColor: AlwaysStoppedAnimation<Color>(progressColor),
+                backgroundColor: widget.progressColor.withOpacity(.2),
+                valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
               )
             ],
           ),
@@ -90,22 +102,34 @@ class MyCourseItem extends StatelessWidget {
     );
   }
 
-  // Widget _buildProgressLessonBlock() {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //     children: [
-  //       Text(
-  //         data["completed"],
-  //         style: TextStyle(color: progressColor),
-  //       ),
-  //       Visibility(
-  //         visible: data["complete_percent"] < 1,
-  //         child: Text(
-  //           data["progress"],
-  //           style: const TextStyle(color: AppColor.labelColor),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
+Future<Map<int, List<int>>> fetchMapFromFirestore() async {
+  try {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('users').doc('me').get();
+    
+    Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+    
+    if (data != null && data.containsKey('mycourses')) {
+      // Get the map field from the document
+      Map<String, dynamic> myCoursesMap = data['mycourses'] as Map<String, dynamic>;
+      
+      // Convert the map field to the desired structure
+      Map<int, List<int>> resultMap = {};
+      myCoursesMap.forEach((key, value) {
+        int intKey = int.parse(key);
+        List<int> intListValue = List<int>.from(value as List<dynamic>);
+        resultMap[intKey] = intListValue;
+      });
+
+      return resultMap;
+    } else {
+      print('Field "mycourses" not found or not in the expected format');
+      return {}; // Return an empty map if the field is not found or not in the expected format
+    }
+  } catch (e) {
+    print('Error fetching data: $e');
+    return {}; // Return an empty map in case of an error
+  }
+}
+
+
 }

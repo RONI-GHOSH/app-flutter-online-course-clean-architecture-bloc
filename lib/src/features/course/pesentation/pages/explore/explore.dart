@@ -5,9 +5,16 @@ import 'package:online_course/src/features/course/pesentation/pages/explore/widg
 import 'package:online_course/src/features/course/pesentation/pages/explore/widgets/explore_search_block.dart';
 import 'package:online_course/src/theme/app_color.dart';
 
-class ExplorePage extends StatelessWidget {
+class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);
 
+  @override
+  State<ExplorePage> createState() => _ExplorePageState();
+}
+
+class _ExplorePageState extends State<ExplorePage> {
+  String selectedCategory = "";
+  String searchTxt = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,14 +40,23 @@ class ExplorePage extends StatelessWidget {
   }
 
   _buildBody() {
-    return const SingleChildScrollView(
+    return  SingleChildScrollView(
       child: Column(
         children: [
-          ExploreSearchBlock(),
-          SizedBox(height: 10),
-          ExploreCategory(),
-          SizedBox(height: 10),
-          ExploreCourseList(),
+          ExploreSearchBlock(onSearch: (String s) { 
+                  setState(() {
+                    searchTxt = s;
+                  });
+           },),
+          const SizedBox(height: 10),
+          ExploreCategory(onCategorySelected: (String c) {
+            setState(() {
+              selectedCategory = c;
+            });
+            
+            },),
+          const SizedBox(height: 10),
+          ExploreCourseList(searchText: searchTxt, selectedCategory: selectedCategory,),
         ],
       ),
     );

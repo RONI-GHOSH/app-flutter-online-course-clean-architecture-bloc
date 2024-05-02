@@ -18,12 +18,12 @@ Future<List<CourseModel>> fetchMyCourses() async {
       CollectionReference reference =  FirebaseFirestore.instance
           .collection('courses');
       // ignore: avoid_function_literals_in_foreach_calls
-      nestedArray.forEach((element) async {
-        DocumentSnapshot courseSnapshot = await reference.where('id' ,isEqualTo: element).get().then((value) => value.docs[0]);
+      for (var element in nestedArray) {
+        DocumentSnapshot courseSnapshot = await reference.where('id', isEqualTo: element).get().then((value) => value.docs[0]);
         Map<String, dynamic> courseData = courseSnapshot.data() as Map<String, dynamic>;
         CourseModel courseModel = CourseModel.fromMap(courseData);
         myCourses.add(courseModel);
-      });
+      }
       return myCourses;
 
 
@@ -41,10 +41,14 @@ Future<List<CourseModel>> fetchMyCourses() async {
 }
 
 
-Future<int> addCourseToAccount(int id) async {
+Future<int> addCourseToAccount(int id, List<int> selectedForPayment) async {
   try {
+    
+      Map<String, dynamic> coursesMap = {id.toString(): FieldValue.arrayUnion(selectedForPayment) };
+
     await  FirebaseFirestore.instance.collection('users').doc('me').update({
-      'courses': FieldValue.arrayUnion([id]) 
+      'courses': FieldValue.arrayUnion([id]) ,
+      'mycourses.$id' : FieldValue.arrayUnion(selectedForPayment)
     });
 
     return 200;

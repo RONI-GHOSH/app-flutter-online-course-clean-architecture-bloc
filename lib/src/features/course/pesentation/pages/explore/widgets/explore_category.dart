@@ -3,7 +3,10 @@ import 'package:online_course/core/utils/dummy_data.dart';
 import 'package:online_course/src/features/course/pesentation/pages/explore/widgets/category_item.dart';
 
 class ExploreCategory extends StatefulWidget {
-  const ExploreCategory({super.key});
+
+  final Function(String) onCategorySelected;
+
+  const ExploreCategory({super.key, required this.onCategorySelected});
 
   @override
   State<ExploreCategory> createState() => _ExploreCategoryState();
@@ -29,6 +32,7 @@ class _ExploreCategoryState extends State<ExploreCategory> {
               setState(() {
                 
                 selectedCategory = index;
+                widget.onCategorySelected(_categories[index]['name']);
               });
             },
           ),
