@@ -81,7 +81,7 @@ class _CourseDetailTabBarState extends State<CourseDetailTabBar>
       builder: (BuildContext context, AsyncSnapshot<List<CourseLessons>> snapshot) { 
 
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: Text('No lessons available'));
         }
         return Container(
         constraints: const BoxConstraints(minHeight: 150, maxHeight: 350),
@@ -96,7 +96,7 @@ class _CourseDetailTabBarState extends State<CourseDetailTabBar>
             builder: (BuildContext context, AsyncSnapshot<List<CourseLessons>> snapshot) { 
             
             if (!snapshot.hasData) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: Text('No exercises available'));
             }
             return Container(
             constraints: const BoxConstraints(minHeight: 150, maxHeight: 350),

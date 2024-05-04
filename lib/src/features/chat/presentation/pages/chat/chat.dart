@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:online_course/core/services/fast_search_service.dart';
 import 'package:online_course/core/utils/dummy_data.dart';
 import 'package:online_course/src/features/chat/presentation/pages/chat/widgets/chat_appbar.dart';
 import 'package:online_course/src/features/chat/presentation/pages/chat/widgets/chat_recent_chat_list.dart';
@@ -27,44 +28,46 @@ class _ChatPageState extends State<ChatPage> {
 @override
 Widget build(BuildContext context) {
   return Scaffold(
-    body: Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          const ChatAppBar(),
-          const SizedBox(height: 16),
-           ChatSearchBlock(onSearch: (String s) { 
-            
-                  searchTxt = s;
-           },),
-          const SizedBox(height: 16),
-           const SizedBox(height: 10),
-          ExploreCategory(onCategorySelected: (String c) {
-            setState(() {
-              selectedCategory = c;
-            });
-            
-            },),
-          Expanded(
-            child: FutureBuilder<List<NotesModel>>(
-              future: fetchNotes(), // Replace fetchNotes with your function to fetch notes from somewhere
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  return ListView.builder(
-                    itemCount: snapshot.data?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return NotesItem(notes: snapshot.data![index]);
-                    },
-                  );
-                }
-              },
+    body: SafeArea(
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            const ChatAppBar(),
+            const SizedBox(height: 16),
+             ChatSearchBlock(onSearch: (String s) { 
+              
+                    searchTxt = s;
+             },),
+            const SizedBox(height: 16),
+             const SizedBox(height: 10),
+            ExploreCategory(onCategorySelected: (String c) {
+              setState(() {
+                selectedCategory = c;
+              });
+              
+              },),
+            Expanded(
+              child: FutureBuilder<List<NotesModel>>(
+                future: fetchNotes(), // Replace fetchNotes with your function to fetch notes from somewhere
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    return ListView.builder(
+                      itemCount: snapshot.data?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return NotesItem(notes: snapshot.data![index]);
+                      },
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -79,7 +82,18 @@ Future<List<NotesModel>> fetchNotes() async {
 
 
     if(searchTxt.isNotEmpty){
-      query = query.where('title', isEqualTo: searchTxt);
+              try {
+        var docIds = await getDocIdsBySearchTerm(searchTxt,'notes');
+
+        if (docIds.isNotEmpty) {
+          query =
+              query.where(FieldPath.documentId, whereIn: docIds);
+        } else {}
+      } catch (e) {
+        if (kDebugMode) {
+          print('search error $e');
+        }
+      }  
     }else if(selectedCategory.isNotEmpty){
       query = query.where('tags', arrayContains: selectedCategory);
     }

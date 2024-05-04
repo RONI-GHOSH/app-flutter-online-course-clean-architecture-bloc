@@ -104,7 +104,7 @@ class FeatureItem extends StatelessWidget {
         ],
       ),
       child: Text(
-        course.price,
+        'Rs. ${course.price}',
         style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w500,

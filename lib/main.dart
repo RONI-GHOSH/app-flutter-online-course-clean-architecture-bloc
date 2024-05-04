@@ -9,8 +9,7 @@ import 'package:online_course/src/features/course/pesentation/bloc/favorite_cour
 import 'package:online_course/src/features/course/pesentation/bloc/feature/feature_course_bloc.dart';
 import 'package:online_course/src/features/course/pesentation/bloc/recommend/recommend_course_bloc.dart';
 import 'package:online_course/src/features/onboarding/presentation/onboarding_screen.dart';
-import 'package:online_course/src/root_app.dart';
-import 'src/theme/app_color.dart';
+import 'package:online_course/src/theme/app_color.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +37,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Online Course App',
         theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 45, 94, 255),
+          primaryColor: AppColor.primary,
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColor.primary)
         ),
         home: const  OnboardingScreen(),
       ),

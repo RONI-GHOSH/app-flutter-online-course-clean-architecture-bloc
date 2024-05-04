@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:online_course/core/utils/dummy_data.dart';
 import 'package:online_course/src/features/course/pesentation/pages/home/widgets/home_appbar.dart';
@@ -18,10 +20,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _user = FirebaseAuth.instance.currentUser;
+  String bannerUrl = '';
   
   @override
   void initState() {
     super.initState();
+    fetchBanner();
   }
 
   @override
@@ -54,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RoundedBannerImage(imageUrl: 'https://th.bing.com/th/id/OIP.iV9mxH3h0AXCl8_vSlARjwAAAA?rs=1&pid=ImgDetMain'),
+          RoundedBannerImage(imageUrl: bannerUrl),
           
           HomeCategory(
             categories: categories,
@@ -70,5 +74,32 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+    Future<void> fetchBanner() async{
+      try {
+           FirebaseFirestore.instance.collection('app').doc('homeScreen').get().then((value) {
+     setState(() {
+       bannerUrl = value['banner'];
+     });
+    });
+      }catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+      }
+      _setData();
+ 
+  }
+
+  Future<void> _setData() async {
+    User _user = FirebaseAuth.instance.currentUser!;
+
+    await FirebaseFirestore.instance.collection('users').doc(_user.uid).update({
+      'uid': _user.uid,
+      'name': _user.displayName,
+      'email': _user.email,
+      'pic': _user.photoURL,
+      
+    });
   }
 }

@@ -104,7 +104,7 @@ class _CourseDetailLessonListState extends State<CourseDetailLessonList> {
               type : widget.type
             );
           },
-                ): const CircularProgressIndicator(),
+                ): const Center(child: CircularProgressIndicator(),),
         )],
     );
   }

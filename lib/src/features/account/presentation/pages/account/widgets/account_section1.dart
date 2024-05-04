@@ -45,8 +45,8 @@ class AccountBlock1 extends StatelessWidget {
             title: "Follow us",
             leadingIcon: "assets/icons/logo_fb.svg",
             bgIconColor: AppColor.green,
-            onTap: () async {
-              await launchUrl(Uri.parse('https://facebook.com/profile.php?id=61558275388856&mibextid=ZbWKwL'));
+            onTap: ()  {
+             launchUrl(Uri.parse('https://facebook.com/profile.php?id=61558275388856&mibextid=ZbWKwL'));
             },
           ),
           Padding(
@@ -62,7 +62,7 @@ class AccountBlock1 extends StatelessWidget {
             leadingIcon: "assets/icons/logo_ig.svg",
             bgIconColor: AppColor.primary,
             onTap: () {
-               launchUrl(Uri.parse('instagram.com/examplanbofficial?igsh=MW9oZmQ0cW1zMWw3MQ=='));
+               launchUrl(Uri.parse('https://instagram.com/examplanbofficial?igsh=MW9oZmQ0cW1zMWw3MQ=='));
             },
           ),
             SettingItem(
@@ -70,7 +70,7 @@ class AccountBlock1 extends StatelessWidget {
             leadingIcon: "assets/icons/logo_telegram.svg",
             bgIconColor: AppColor.primary,
              onTap: () {
-              launchUrl(Uri.parse('telegram.me/examplanbofficials'));
+              launchUrl(Uri.parse('https://telegram.me/examplanbofficials'));
             },
           ),
              SettingItem(
@@ -78,7 +78,7 @@ class AccountBlock1 extends StatelessWidget {
             leadingIcon: "assets/icons/logo_whatsapp.svg",
             bgIconColor: AppColor.primary,
             onTap: () {
-              launchUrl(Uri.parse('whatsapp.com/channel/0029VaVxVLnKWEKqERsKKw1l'));
+              launchUrl(Uri.parse('https://whatsapp.com/channel/0029VaVxVLnKWEKqERsKKw1l'));
             },
           ),
         ],

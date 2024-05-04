@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_course/core/errors/exception.dart';
+import 'package:online_course/core/services/fast_search_service.dart';
 import 'package:online_course/core/utils/app_navigate.dart';
 import 'package:online_course/core/utils/app_util.dart';
 import 'package:online_course/src/features/course/data/models/course_model.dart';
@@ -93,10 +95,23 @@ class _ExploreCourseListState extends State<ExploreCourseList> {
 
 
       if(widget.searchText.isNotEmpty){
-        query = query
-            .where('title', isGreaterThanOrEqualTo: widget.searchText)
-            .limit(20);
-            
+        // query = query
+        //     .where('title', isGreaterThanOrEqualTo: widget.searchText)
+        //     .limit(20);
+           try {
+        var docIds = await getDocIdsBySearchTerm(widget.searchText,'course');
+
+        if (docIds.isNotEmpty) {
+          query =
+              query.where(FieldPath.documentId, whereIn: docIds);
+        } else {}
+      } catch (e) {
+        if (kDebugMode) {
+          print('search error $e');
+        }
+      }   
+
+
       }else if(widget.selectedCategory.isNotEmpty){
         query = query
             .where('tags', arrayContains: widget.selectedCategory)

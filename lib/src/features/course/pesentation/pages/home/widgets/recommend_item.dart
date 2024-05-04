@@ -68,7 +68,7 @@ class RecommendItem extends StatelessWidget {
           height: 5,
         ),
         Text(
-          data.price,
+          'Rs. ${data.price}',
           style: const TextStyle(fontSize: 14, color: AppColor.textColor),
         ),
         const SizedBox(

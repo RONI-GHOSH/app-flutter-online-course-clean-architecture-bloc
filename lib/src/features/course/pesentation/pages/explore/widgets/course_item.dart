@@ -130,7 +130,7 @@ class CourseItem extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildAttribute(Icons.sell_outlined, AppColor.labelColor, course.price),
+        _buildAttribute(Icons.sell_outlined, AppColor.labelColor,'Rs. ${course.price}'),
         _buildAttribute(
             Icons.play_circle_outlined, AppColor.labelColor, course.session),
         _buildAttribute(

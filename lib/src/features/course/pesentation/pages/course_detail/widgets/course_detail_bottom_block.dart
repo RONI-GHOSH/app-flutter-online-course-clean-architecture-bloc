@@ -54,8 +54,10 @@ class _CourseDetailBottomBlockState extends State<CourseDetailBottomBlock> {
     var options = {
       'key': 'rzp_test_1DP5mmOlF5G5ag',
       'amount': price*100,
-      'name': 'Acme Corp.',
-      'description': 'Fine T-Shirt',
+      'name': 'Examplan B',
+      'image': 'assets/images/examplan_logo.png',
+      'description': 'Online Course',
+      'theme': {'color': '#FDCC20'}
       
     };
 
@@ -182,7 +184,7 @@ Widget _buildBottomSheet(BuildContext context, String message, [String? paymentI
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: widget.course.price,
+                      text: 'Rs. ${widget.course.price}',
                       style: const TextStyle(
                         fontSize: 18,
                         color: AppColor.textColor,
