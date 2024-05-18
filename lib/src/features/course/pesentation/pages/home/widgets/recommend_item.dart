@@ -23,7 +23,7 @@ class RecommendItem extends StatelessWidget {
         width: 400,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
+          color: AppColor.bg_dark,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.1),
@@ -59,7 +59,7 @@ class RecommendItem extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
-            color: AppColor.textColor,
+            // color: AppColor.textColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -69,7 +69,7 @@ class RecommendItem extends StatelessWidget {
         ),
         Text(
           'Rs. ${data.price}',
-          style: const TextStyle(fontSize: 14, color: AppColor.textColor),
+          style: const TextStyle(fontSize: 14, color: AppColor.labelColor),
         ),
         const SizedBox(
           height: 15,

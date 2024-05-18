@@ -1,17 +1,13 @@
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:online_course/core/services/fast_search_service.dart';
-import 'package:online_course/core/utils/dummy_data.dart';
 import 'package:online_course/src/features/chat/presentation/pages/chat/widgets/chat_appbar.dart';
-import 'package:online_course/src/features/chat/presentation/pages/chat/widgets/chat_recent_chat_list.dart';
 import 'package:online_course/src/features/chat/presentation/pages/chat/widgets/chat_search_block.dart';
 import 'package:online_course/src/features/chat/presentation/pages/chat/widgets/notes_item.dart';
 import 'package:online_course/src/features/course/data/models/notes_model.dart';
 import 'package:online_course/src/features/course/pesentation/pages/explore/widgets/explore_category.dart';
-import 'package:online_course/src/theme/app_color.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -25,6 +21,13 @@ class _ChatPageState extends State<ChatPage> {
   
   String searchTxt = "";
   String selectedCategory= "";// Set this to false when the user upgrades
+  List<NotesModel> notesList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchNotes();
+  }
 @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -35,9 +38,10 @@ Widget build(BuildContext context) {
           children: [
             const ChatAppBar(),
             const SizedBox(height: 16),
-             ChatSearchBlock(onSearch: (String s) { 
-              
+             ChatSearchBlock(onSearch: (String s) async{ 
+                print(s);
                     searchTxt = s;
+                   fetchNotes();
              },),
             const SizedBox(height: 16),
              const SizedBox(height: 10),
@@ -45,26 +49,15 @@ Widget build(BuildContext context) {
               setState(() {
                 selectedCategory = c;
               });
-              
+               fetchNotes();
               },),
             Expanded(
-              child: FutureBuilder<List<NotesModel>>(
-                future: fetchNotes(), // Replace fetchNotes with your function to fetch notes from somewhere
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else {
-                    return ListView.builder(
-                      itemCount: snapshot.data?.length ?? 0,
+              child:ListView.builder(
+                      itemCount: notesList.length ?? 0,
                       itemBuilder: (context, index) {
-                        return NotesItem(notes: snapshot.data![index]);
+                        return NotesItem(notes: notesList[index]);
                       },
-                    );
-                  }
-                },
-              ),
+                    ),
             ),
           ],
         ),
@@ -74,7 +67,7 @@ Widget build(BuildContext context) {
 }
 // Method to fetch notes from the 'pyq' collection in Firestore
 Future<List<NotesModel>> fetchNotes() async {
-  List<NotesModel> notesList = [];
+  List<NotesModel> noteList = [];
 
   try {
     // Get a reference to the 'pyq' collection
@@ -109,7 +102,7 @@ Future<List<NotesModel>> fetchNotes() async {
         url: doc['url'],
         timestamp: doc['timestamp'] as Timestamp,
       );
-      notesList.add(note);
+      noteList.add(note);
     }
   } catch (e) {
     // Handle any errors that occur during the fetch operation
@@ -120,6 +113,8 @@ Future<List<NotesModel>> fetchNotes() async {
     // throw e;
   }
 
+  notesList= noteList;
+  setState(() {});
   return notesList;
 }
 

@@ -32,7 +32,11 @@ class _ExploreSearchBlockState extends State<ExploreSearchBlock> {
           const Expanded(
             child: CustomTextBox(
               hint: "Search",
-              prefix: Icon(Icons.search, color: Colors.grey),
+              prefix: Icon(Icons.search,
+              
+              //  color: Colors.grey
+               
+               ),
             ),
           ),
           const SizedBox(
@@ -44,7 +48,10 @@ class _ExploreSearchBlockState extends State<ExploreSearchBlock> {
             onTap: () {
                widget.onSearch(_searchController.text);
             },
-            child: const Icon(Icons.search, color: Colors.white),
+            child: const Icon(Icons.search, 
+            // color: Colors.white
+            
+            ),
           )
         ],
       ),

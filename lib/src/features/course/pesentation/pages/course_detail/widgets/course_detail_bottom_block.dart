@@ -55,9 +55,9 @@ class _CourseDetailBottomBlockState extends State<CourseDetailBottomBlock> {
       'key': 'rzp_test_1DP5mmOlF5G5ag',
       'amount': price*100,
       'name': 'Examplan B',
-      'image': 'assets/images/examplan_logo.png',
+      'image': 'assets/images/examplan_b_logo.png',
       'description': 'Online Course',
-      'theme': {'color': '#FDCC20'}
+      'theme': {'color': '#2C4BD9'}
       
     };
 
@@ -151,7 +151,7 @@ Widget _buildBottomSheet(BuildContext context, String message, [String? paymentI
       height: 80,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        // color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: AppColor.shadowColor.withOpacity(0.05),
@@ -187,7 +187,7 @@ Widget _buildBottomSheet(BuildContext context, String message, [String? paymentI
                       text: 'Rs. ${widget.course.price}',
                       style: const TextStyle(
                         fontSize: 18,
-                        color: AppColor.textColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

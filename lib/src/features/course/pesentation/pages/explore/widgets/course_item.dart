@@ -30,7 +30,7 @@ class CourseItem extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.only(bottom: 5, top: 5),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColor.bg_dark,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -99,7 +99,7 @@ class CourseItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 17,
-                  color: AppColor.textColor,
+                  // color: AppColor.textColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -155,7 +155,9 @@ class CourseItem extends StatelessWidget {
           info,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: AppColor.labelColor, fontSize: 13),
+          style: const TextStyle(
+            // color: AppColor.labelColor,
+             fontSize: 13),
         ),
       ],
     );

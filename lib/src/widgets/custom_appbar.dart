@@ -9,11 +9,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   build(BuildContext context) {
     return AppBar(
-      iconTheme: const IconThemeData(color: AppColor.darker),
-      backgroundColor: AppColor.appBarColor,
+      iconTheme: const IconThemeData(color: AppColor.labelColor),
+      backgroundColor: AppColor.darker,
       title: Text(
         title,
-        style: const TextStyle(color: AppColor.textColor),
+        style: const TextStyle(color: Colors.white),
       ),
       actions: actions,
     );

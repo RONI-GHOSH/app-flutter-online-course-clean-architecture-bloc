@@ -55,20 +55,24 @@ class _CourseDetailTabBarState extends State<CourseDetailTabBar>
   Widget _buildTabBar() {
     return TabBar(
       controller: tabController,
-      labelColor: Colors.redAccent,
+      labelColor: Color(4283521938),
       isScrollable: false,
-      indicatorColor: AppColor.primary,
+      indicatorColor: AppColor.actionColor,
       tabs: const [
         Tab(
           child: Text(
             "Lessons",
-            style: TextStyle(color: AppColor.darker, fontSize: 16),
+            style: TextStyle(
+              // color: AppColor.darker, 
+              fontSize: 16),
           ),
         ),
         Tab(
           child: Text(
             "Exercises",
-            style: TextStyle(color: AppColor.darker, fontSize: 16),
+            style: TextStyle(
+              // color: AppColor.darker, 
+              fontSize: 16),
           ),
         ),
       ],

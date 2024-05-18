@@ -13,7 +13,7 @@ class ChatAppBar extends StatelessWidget {
           "Previous year questions",
           style: TextStyle(
             fontSize: 28,
-            color: AppColor.textColor,
+            // color: AppColor.textColor,
             fontWeight: FontWeight.w600,
           ),
         )

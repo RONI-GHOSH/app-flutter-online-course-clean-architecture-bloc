@@ -18,11 +18,11 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.appBgColor,
+      // backgroundColor: AppColor.appBgColor,
       body: CustomScrollView(
         slivers: [
           const SliverAppBar(
-            backgroundColor: AppColor.appBarColor,
+            // backgroundColor: AppColor.appBarColor,
             pinned: true,
             snap: true,
             floating: true,

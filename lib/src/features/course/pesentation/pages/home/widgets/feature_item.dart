@@ -28,7 +28,7 @@ class FeatureItem extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColor.bg_dark,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -75,7 +75,7 @@ class FeatureItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 17,
-              color: AppColor.textColor,
+              // color: AppColor.textColor,
               fontWeight: FontWeight.w600,
             ),
           ),

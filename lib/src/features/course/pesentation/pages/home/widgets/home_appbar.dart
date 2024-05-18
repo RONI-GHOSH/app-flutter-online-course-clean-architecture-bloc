@@ -30,7 +30,7 @@ class HomeAppBar extends StatelessWidget {
               Text(
                 user?.displayName ?? 'Dear student',
                 style: const TextStyle(
-                  color: AppColor.labelColor,
+                  color: Colors.white,
                   fontSize: 14,
                 ),
               ),
@@ -40,7 +40,7 @@ class HomeAppBar extends StatelessWidget {
               const Text(
                 "Welcome back!",
                 style: TextStyle(
-                  color: AppColor.textColor,
+                  color: AppColor.labelColor,
                   fontWeight: FontWeight.w500,
                   fontSize: 18,
                 ),

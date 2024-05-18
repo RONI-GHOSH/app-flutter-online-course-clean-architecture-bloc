@@ -9,7 +9,7 @@ import 'package:online_course/src/features/course/pesentation/bloc/favorite_cour
 import 'package:online_course/src/features/course/pesentation/bloc/feature/feature_course_bloc.dart';
 import 'package:online_course/src/features/course/pesentation/bloc/recommend/recommend_course_bloc.dart';
 import 'package:online_course/src/features/onboarding/presentation/onboarding_screen.dart';
-import 'package:online_course/src/theme/app_color.dart';
+import 'package:online_course/src/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,10 +22,14 @@ MediaKit.ensureInitialized();
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   const MyApp({super.key});
+
+  final MaterialTheme materialTheme = const MaterialTheme(TextTheme());
 
   @override
   Widget build(BuildContext context) {
+   
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => locator.get<CourseBloc>()),
@@ -36,10 +40,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Online Course App',
-        theme: ThemeData(
-          primaryColor: AppColor.primary,
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColor.primary)
-        ),
+        themeMode: ThemeMode.dark,
+        darkTheme: materialTheme.dark(),
+        theme: materialTheme.light(),
         home: const  OnboardingScreen(),
       ),
     );

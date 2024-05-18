@@ -20,7 +20,7 @@ class CategoryItem extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColor.primary : AppColor.cardColor,
+          color: isSelected ? AppColor.primary : AppColor.darker,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -37,7 +37,7 @@ class CategoryItem extends StatelessWidget {
             SvgPicture.asset(
               data["icon"],
               colorFilter: ColorFilter.mode(
-                  isSelected ? Colors.white : AppColor.darker, BlendMode.srcIn),
+                  isSelected ? Colors.white : AppColor.labelColor, BlendMode.srcIn),
               width: 16,
               height: 16,
             ),
@@ -50,7 +50,7 @@ class CategoryItem extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 13,
-                color: isSelected ? Colors.white : AppColor.darker,
+                color: isSelected ? Colors.white : AppColor.labelColor,
               ),
             )
           ],

@@ -24,7 +24,7 @@ class FavoriteItem extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.white,
+          // color: Colors.white,
           boxShadow: [
             BoxShadow(
               color: AppColor.shadowColor.withOpacity(0.1),
@@ -45,7 +45,7 @@ class FavoriteItem extends StatelessWidget {
                   flex: 8,
                   onPressed: onDelete,
                   backgroundColor: AppColor.actionColor,
-                  foregroundColor: Colors.white,
+                  // foregroundColor: Colors.white,
                   icon: Icons.delete,
                   label: 'Delete',
                 ),
@@ -82,7 +82,7 @@ class FavoriteItem extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
-            color: AppColor.textColor,
+            // color: AppColor.textColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -107,7 +107,7 @@ class FavoriteItem extends StatelessWidget {
       children: [
         const Icon(
           Icons.schedule_rounded,
-          color: AppColor.labelColor,
+          // color: AppColor.labelColor,
           size: 14,
         ),
         const SizedBox(
@@ -117,7 +117,7 @@ class FavoriteItem extends StatelessWidget {
           course.duration,
           style: const TextStyle(
             fontSize: 12,
-            color: AppColor.labelColor,
+            // color: AppColor.labelColor,
           ),
         ),
         const SizedBox(
@@ -135,7 +135,7 @@ class FavoriteItem extends StatelessWidget {
           course.review,
           style: const TextStyle(
             fontSize: 12,
-            color: AppColor.labelColor,
+            // color: AppColor.labelColor,
           ),
         )
       ],

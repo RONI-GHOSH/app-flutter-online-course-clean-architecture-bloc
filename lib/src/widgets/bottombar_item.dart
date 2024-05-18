@@ -30,7 +30,7 @@ class BottomBarItem extends StatelessWidget {
         padding: const EdgeInsets.all(7),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: AppColor.bottomBarColor,
+          color: AppColor.darker,
           boxShadow: [
             if (isActive)
               BoxShadow(

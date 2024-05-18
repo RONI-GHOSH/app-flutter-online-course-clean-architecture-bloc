@@ -24,7 +24,7 @@ class AccountBlock3 extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: AppColor.cardColor,
+          color: AppColor.darker,
           boxShadow: [
             BoxShadow(
               color: AppColor.shadowColor.withOpacity(0.1),
@@ -37,7 +37,7 @@ class AccountBlock3 extends StatelessWidget {
         child: const SettingItem(
           title: "Log Out",
           leadingIcon: "assets/icons/logout.svg",
-          bgIconColor: AppColor.darker,
+          bgIconColor: AppColor.bottomBarColor,
         ),
       ),
     );

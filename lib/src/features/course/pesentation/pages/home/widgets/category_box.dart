@@ -38,7 +38,7 @@ class CategoryBox extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.fade,
       style: const TextStyle(
-        color: AppColor.textColor,
+        color: AppColor.labelColor,
         fontWeight: FontWeight.w500,
       ),
     );
@@ -50,7 +50,7 @@ class CategoryBox extends StatelessWidget {
       curve: Curves.fastOutSlowIn,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: isSelected ? AppColor.red : Colors.white,
+        color: isSelected ? AppColor.actionColor : AppColor.darker,
         boxShadow: [
           BoxShadow(
             color: AppColor.shadowColor.withOpacity(0.1),
@@ -64,7 +64,7 @@ class CategoryBox extends StatelessWidget {
       child: SvgPicture.asset(
         data["icon"],
         colorFilter: ColorFilter.mode(
-          isSelected ? selectedColor : AppColor.textColor,
+          isSelected ? selectedColor : Colors.white,
           BlendMode.srcIn,
         ),
         width: 30,

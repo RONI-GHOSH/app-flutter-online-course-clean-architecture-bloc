@@ -12,7 +12,7 @@ class AccountAppBar extends StatelessWidget {
         Text(
           "Account",
           style: TextStyle(
-            color: AppColor.textColor,
+            // color: AppColor.textColor,
             fontSize: 24,
             fontWeight: FontWeight.w600,
           ),

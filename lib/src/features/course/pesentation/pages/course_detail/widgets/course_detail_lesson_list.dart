@@ -85,7 +85,7 @@ class _CourseDetailLessonListState extends State<CourseDetailLessonList> {
                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                      child: Chip(
                       label: Text(sectionName),
-                      backgroundColor: sectionValue == selectedSection ? AppColor.primary : Colors.white,
+                      backgroundColor: sectionValue == selectedSection ? AppColor.primary : AppColor.darker,
                      ),
                    ),
                  );

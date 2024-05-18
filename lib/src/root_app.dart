@@ -34,8 +34,8 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
       "page": const MyCoursePage(),
     },
     {
-      "icon": "assets/icons/chat.svg",
-      "active_icon": "assets/icons/chat.svg",
+      "icon": "assets/icons/document_check.svg",
+      "active_icon": "assets/icons/document_check.svg",
       "page": const ChatPage(),
     },
     {
@@ -86,7 +86,7 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.appBgColor,
+      // backgroundColor: AppColor.appBgColor,
       bottomNavigationBar: _buildBottomBar(),
       body: _buildPage(),
     );
@@ -107,7 +107,7 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
       height: 75,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColor.bottomBarColor,
+        color: AppColor.bg_dark,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(25),
           topRight: Radius.circular(25),
@@ -139,7 +139,7 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
           (index) => BottomBarItem(
             _barItems[index]["icon"],
             isActive: _activeTab == index,
-            activeColor: AppColor.darker,
+            activeColor: AppColor.primary,
             onTap: () {
               onPageChanged(index);
             },

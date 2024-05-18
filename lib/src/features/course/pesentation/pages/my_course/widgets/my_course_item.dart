@@ -42,7 +42,7 @@ class _MyCourseItemState extends State<MyCourseItem> {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
+            // color: Colors.white,
             boxShadow: [
               BoxShadow(
                 color: AppColor.shadowColor.withOpacity(0.1),
@@ -57,48 +57,54 @@ class _MyCourseItemState extends State<MyCourseItem> {
   }
 
   Widget _buildCourseInfo() {
-    return Row(
-      children: [
-        CustomImage(
-          widget.data.image,
-          radius: 10,
-          height: 70,
-          width: 70,
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.data.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    color: AppColor.textColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500),
+    return Card(
+      color: AppColor.bg_dark,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          children: [
+            CustomImage(
+              widget.data.image,
+              radius: 10,
+              height: 70,
+              width: 70,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.data.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        color: AppColor.labelColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                 // _buildProgressLessonBlock(),
+                  const SizedBox(
+                    height: 7,
+                  ),
+                  LinearProgressIndicator(
+                    value: 
+                    // data["complete_percent"].toDouble() ??
+                     1.0,
+                    backgroundColor: widget.progressColor.withOpacity(.2),
+                    valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
+                  )
+                ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-             // _buildProgressLessonBlock(),
-              const SizedBox(
-                height: 7,
-              ),
-              LinearProgressIndicator(
-                value: 
-                // data["complete_percent"].toDouble() ??
-                 1.0,
-                backgroundColor: widget.progressColor.withOpacity(.2),
-                valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

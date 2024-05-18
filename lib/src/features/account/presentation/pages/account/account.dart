@@ -18,17 +18,19 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        const SliverAppBar(
-          backgroundColor: AppColor.appBgColor,
-          pinned: true,
-          snap: true,
-          floating: true,
-          title: AccountAppBar(),
-        ),
-        SliverToBoxAdapter(child: _buildBody())
-      ],
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          const SliverAppBar(
+            // backgroundColor: AppColor.appBgColor,
+            pinned: true,
+            snap: true,
+            floating: true,
+            title: AccountAppBar(),
+          ),
+          SliverToBoxAdapter(child: _buildBody())
+        ],
+      ),
     );
   }
 

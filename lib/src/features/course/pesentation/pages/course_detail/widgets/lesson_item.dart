@@ -48,7 +48,7 @@ class LessonItem extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
+            // color: Colors.white,
             boxShadow: [
               BoxShadow(
                 color: AppColor.shadowColor.withOpacity(0.05),
@@ -60,11 +60,14 @@ class LessonItem extends StatelessWidget {
           ),
           child: Row(
             children: [
-              CustomImage(
-                data.image??'',
-                radius: 10,
-                height: 70,
-                width: 70,
+              Card(
+                color: AppColor.labelColor,
+                child: CustomImage(
+                  data.image??'',
+                  radius: 10,
+                  height: 70,
+                  width: 70,
+                ),
               ),
               const SizedBox(
                 width: 10,
@@ -78,7 +81,7 @@ class LessonItem extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                          color: AppColor.textColor,
+                          // color: AppColor.textColor,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -98,7 +101,10 @@ class LessonItem extends StatelessWidget {
                         Text(
                           data.duration,
                           style: const TextStyle(
-                              fontSize: 13, color: AppColor.labelColor),
+                              fontSize: 13, 
+                              color: AppColor.labelColor
+                              
+                              ),
                         ),
                       ],
                     ),
@@ -107,7 +113,7 @@ class LessonItem extends StatelessWidget {
               ),
               const Icon(
                 Icons.arrow_forward_ios_outlined,
-                color: AppColor.labelColor,
+                // color: AppColor.labelColor,
                 size: 15,
               ),
             ],

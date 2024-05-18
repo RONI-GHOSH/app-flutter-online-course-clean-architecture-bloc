@@ -20,7 +20,7 @@ class SettingBox extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: Colors.white,
+        color: AppColor.darker,
         boxShadow: [
           BoxShadow(
             color: AppColor.shadowColor.withOpacity(0.1),

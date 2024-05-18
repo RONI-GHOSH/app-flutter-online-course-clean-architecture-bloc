@@ -78,7 +78,7 @@ class CourseDetailInfo extends StatelessWidget {
           moreStyle: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
-            color: AppColor.red,
+            color: Color(4283521938),
           ),
         ),
       ],
@@ -100,7 +100,10 @@ class CourseDetailInfo extends StatelessWidget {
           info,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: AppColor.labelColor, fontSize: 14),
+          style: const TextStyle(
+            // color: AppColor.labelColor,
+            
+             fontSize: 14),
         ),
       ],
     );

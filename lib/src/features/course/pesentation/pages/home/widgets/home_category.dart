@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_course/src/features/course/pesentation/pages/home/widgets/category_box.dart';
+import 'package:online_course/src/theme/app_color.dart';
 
 class HomeCategory extends StatelessWidget {
   const HomeCategory({required this.categories, super.key});
@@ -17,7 +18,7 @@ class HomeCategory extends StatelessWidget {
           (index) => Padding(
             padding: const EdgeInsets.only(right: 15),
             child: CategoryBox(
-              selectedColor: Colors.white,
+              selectedColor: AppColor.primary,
               data: categories[index],
               onTap: null,
             ),

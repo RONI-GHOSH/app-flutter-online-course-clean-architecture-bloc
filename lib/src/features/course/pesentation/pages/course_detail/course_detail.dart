@@ -29,7 +29,7 @@ Map<String, int> sections = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.appBgColor,
+      // backgroundColor: AppColor.appBgColor,
       appBar: const CustomAppBar(title: "Details"),
       body: _buildBody(widget.course),
       bottomNavigationBar: !widget.isPurchased ? CourseDetailBottomBlock(course: widget.course, subjects: sections,):null,

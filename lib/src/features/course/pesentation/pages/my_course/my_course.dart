@@ -60,7 +60,7 @@ class _MyCoursePageState extends State<MyCoursePage>
 
   Widget _buildSilverAppbar() {
     return SliverAppBar(
-      backgroundColor: AppColor.appBarColor,
+      // backgroundColor: AppColor.appBarColor,
       pinned: true,
       snap: true,
       floating: true,
@@ -69,7 +69,7 @@ class _MyCoursePageState extends State<MyCoursePage>
         controller: tabController,
         indicatorColor: AppColor.primary,
         indicatorWeight: 1,
-        unselectedLabelColor: AppColor.textColor,
+        // unselectedLabelColor: AppColor.textColor,
         labelColor: AppColor.primary,
         labelStyle: const TextStyle(
           fontSize: 16,

@@ -26,7 +26,7 @@ class ChatNotify extends StatelessWidget {
         ),
         child: Text(
           "$number",
-          style: const TextStyle(color: Colors.white),
+          // style: const TextStyle(color: Colors.white),
         ),
       ),
     );

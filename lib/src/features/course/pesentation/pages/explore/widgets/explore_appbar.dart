@@ -16,7 +16,7 @@ class ExploreAppbar extends StatelessWidget {
               Text(
                 "Explore",
                 style: TextStyle(
-                  color: AppColor.textColor,
+                  // color: AppColor.textColor,
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
                 ),

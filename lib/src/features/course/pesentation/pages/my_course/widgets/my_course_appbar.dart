@@ -18,7 +18,7 @@ class MyCourseAppBar extends StatelessWidget {
               Text(
                 "My Course",
                 style: TextStyle(
-                  color: AppColor.textColor,
+                  color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
                 ),
@@ -27,7 +27,7 @@ class MyCourseAppBar extends StatelessWidget {
           ),
         ),
         IconBox(
-          bgColor: AppColor.appBarColor,
+          // bgColor: AppColor.appBarColor,
           child: SvgPicture.asset(
             "assets/icons/filter.svg",
             width: 20,
